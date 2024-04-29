@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -47,6 +47,7 @@ public class Main {
 
         //task 5
         System.out.println(getSortedList(new ArrayList<>(Arrays.asList(1, 3, 5, 6, 7, 8))));
+        System.out.println(getSortedList(new ArrayList<>(Arrays.asList(-1, -3, -5, -6, -7, -8))));
         System.out.println(getSortedList(new ArrayList<>(Arrays.asList(6, 7, 9, 11, 15, 16))));
         System.out.println(getSortedList(new ArrayList<>()));
     }
@@ -168,10 +169,8 @@ public class Main {
         Integer minNumber = list.stream().min(Comparator.naturalOrder()).get();
         Integer maxNumber = list.stream().max(Comparator.naturalOrder()).get();
 
-        return Stream.iterate(0, i -> i + 1)
-                .filter(number -> number >= minNumber)
-                .limit(maxNumber - minNumber + 1)
+        return IntStream.range(minNumber, maxNumber + 1)
+                .boxed()
                 .collect(Collectors.toList());
-
     }
 }
